@@ -6,6 +6,12 @@
 node ./src/index.js --container=<container_name>
 ```
 
+실용적인 예제는 다음과 같습니다.
+
+```sh
+sudo node ./src/index.js --container=nginx_proxy
+```
+
 도커 컨테이너 명을 전달하면 자동으로 로그 파일의 크기를 0으로 만들어 줍니다, 이 명령은 동기 모드로 동작합니다. 기본적으로 노드의 파일 시스템 API를 이용하지 않아도, 터미널 명령어를 통해 리눅스에서 다음과 같이 처리가 가능합니다.
 
 ```sh

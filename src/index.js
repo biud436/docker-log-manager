@@ -12,7 +12,7 @@ const COMMAND = {
 function truncateLogFile(container_name) {
   if (process.platform === "linux") {
     const raw = cp.execSync(COMMAND.GET_LOGFILE(container_name));
-    const data = JSON.parse("{" + raw.toString("utf-8") + "'tracks':[]}");
+    const data = JSON.parse("{" + raw.toString("utf-8") + '"tracks":[]}');
     if ("LogPath" in data) {
       const logFile = data.LogPath;
       fs.truncateSync(logFile, 0);

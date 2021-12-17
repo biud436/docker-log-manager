@@ -1,2 +1,2 @@
 #!/bin/sh
-docker run --rm clearlog:latest -e LOG_CONTAINER='nginx_proxy'
+docker run --rm clearlog:latest nginx_proxy

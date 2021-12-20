@@ -29,10 +29,24 @@ function truncateLogFile(container_name) {
   }
 }
 
-function sendLogToServer() {
-  // axios.post(`http://localhost:3000/logs`, data)
+/**
+ * @class App
+ * @description
+ * This class allows you to run the application.
+ */
+class App {
+  constructor() {}
+
+  start() {
+    if (!argv.container) {
+      console.log("--container is not passed");
+    }
+
+    if (argv.container) {
+      truncateLogFile(argv.container);
+    }
+  }
 }
 
-if (argv.container) {
-  truncateLogFile(argv.container);
-}
+const app = new App();
+app.start();

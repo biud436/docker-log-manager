@@ -4,13 +4,20 @@ const fs = require("fs");
 const cp = require("child_process");
 const argv = require("minimist")(process.argv.slice(2));
 const cron = require("node-cron");
+const axios = require("axios");
 
 const COMMAND = {
   GET_LOGFILE: (container_name) =>
     `docker inspect ${container_name} | grep LogPath`,
 };
 
+/**
+ * Truncate the log file to the specified size.
+ *
+ * @param {String} container_name
+ */
 function truncateLogFile(container_name) {
+  // 리눅스인가?
   if (process.platform === "linux") {
     const raw = cp.execSync(COMMAND.GET_LOGFILE(container_name));
     const data = JSON.parse("{" + raw.toString("utf-8") + '"tracks":[]}');
@@ -20,6 +27,10 @@ function truncateLogFile(container_name) {
       console.log("작업이 완료되었습니다");
     }
   }
+}
+
+function sendLogToServer() {
+  // axios.post(`http://localhost:3000/logs`, data)
 }
 
 if (argv.container) {

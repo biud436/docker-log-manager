@@ -20,7 +20,7 @@ sudo npx ts-node ./src/index.ts --all -d
 
 ```sh
 ps -xa | grep docker-log-manager
-sudo kill -9 `ps -xa | grep docker-log-manager | awk '{print $1}'`
+sudo kill -9 `ps -xa | grep docker-log-manager | awk '{print $1}' | head -n 1`
 ```
 
 ## 특정 컨테이너의 로그 삭제

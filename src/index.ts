@@ -124,7 +124,8 @@ class App {
     const baseId = v4();
     const containerName = container_name;
     const targetFileBaseName =
-      moment().format(`YYYY-MM-DD-HH-mm-ss-${containerName}-${baseId}`) +
+      moment().format(`YYYY-MM-DD-HH-mm-ss`) +
+      `${containerName}-${baseId}` +
       ".log";
 
     if (fs.existsSync(logFilePath)) {

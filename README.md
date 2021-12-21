@@ -16,6 +16,13 @@ sudo npx ts-node ./src/index.ts --all
 sudo npx ts-node ./src/index.ts --all -d
 ```
 
+## 모든 프로세스 종료
+
+```sh
+ps -xa | grep docker-log-manager
+sudo kill -9 `ps -xa | grep docker-log-manager | awk '{print $1}'`
+```
+
 ## 특정 컨테이너의 로그 삭제
 
 ```sh

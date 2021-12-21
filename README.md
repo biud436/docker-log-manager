@@ -12,6 +12,12 @@ npx ts-node ./src/index.ts --container=<container_name>
 sudo npx ts-node ./src/index.ts --container=nginx_proxy
 ```
 
+모든 로그를 삭제하려면 다음과 같이 하시기 바랍니다.
+
+```sh
+sudo npx ts-node ./src/index.ts --all
+```
+
 도커 컨테이너 명을 전달하면 자동으로 로그 파일의 크기를 0으로 만들어 줍니다, 이 명령은 동기 모드로 동작합니다. 기본적으로 노드의 파일 시스템 API를 이용하지 않아도, 터미널 명령어를 통해 리눅스에서 다음과 같이 처리가 가능합니다.
 
 ```sh

@@ -21,11 +21,14 @@ class App {
    * 앱을 실행합니다.
    */
   start() {
-    if (!argv.container) {
-      console.log("--container is not passed");
+    if (argv.container) {
+      this.truncateLogFile(argv.container);
+    } else if (argv.all) {
+      const containerList = this.getContainerList();
+      for (const container of containerList) {
+        this.truncateLogFile(container);
+      }
     }
-
-    this.truncateLogFile(argv.container);
   }
 
   /**

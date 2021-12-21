@@ -148,7 +148,7 @@ if (argv.cron) {
 } else if (argv.d) {
   const subprocess = cp.spawn(
     `npx`,
-    ["ts-node", `${__dirname}/../src/index.ts`, "--cron"],
+    ["ts-node", `${__dirname}/../src/index.ts`, "--cron", "--all"],
     {
       stdio: "ignore",
       detached: true,

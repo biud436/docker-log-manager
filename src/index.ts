@@ -6,6 +6,8 @@ import * as axios from "axios";
 import { Commander } from "./commander";
 import * as config from "../config.json";
 import minimist from "minimist";
+import moment from "moment";
+import { v4 } from "uuid";
 
 const argv = minimist(process.argv.slice(2));
 
@@ -53,7 +55,8 @@ class App {
       const data = JSON.parse("{" + raw.toString("utf-8") + '"tracks":[]}');
       if ("LogPath" in data) {
         const logFile = data.LogPath;
-        fs.truncateSync(logFile, 0);
+        this.copyLogFileAsTargetFolder(logFile);
+        this.eraseLog(logFile);
         console.log("작업이 완료되었습니다");
       }
     } catch (e) {
@@ -62,16 +65,51 @@ class App {
     }
   }
 
-  copyLogFile(container_name: string, content: string) {
+  /**
+   * 루트 권한을 가지고 있는지 확인합니다.
+   * @returns
+   */
+  isRootAuthority() {
+    return process.getuid() === 0;
+  }
+
+  /**
+   * 로그 파일의 내용을 제거합니다.
+   * @param logFilePath
+   */
+  eraseLog(logFilePath: string) {
+    fs.truncateSync(logFilePath, 0);
+  }
+
+  /**
+   * 로그 파일을 복제합니다.
+   *
+   * @param logFilePath {string} 로그 파일의 경로를 기입하세요.
+   */
+  copyLogFileAsTargetFolder(logFilePath: string) {
     /**
      * @type {string}
      */
     const targetFolder = config.targetFolder;
 
+    if (!this.isRootAuthority()) {
+      throw new Error("root 권한이 없습니다");
+    }
+
     if (!fs.existsSync(targetFolder)) {
-      throw new Error(
-        "the key named 'targetFolder' can't be found in your system."
-      );
+      fs.mkdirSync(targetFolder);
+    }
+
+    const baseId = v4();
+    const targetFileBaseName =
+      moment().format(`YYYY-MM-DD-HH-mm-ss-${baseId}`) + ".log";
+
+    if (fs.existsSync(logFilePath)) {
+      const content = fs.readFileSync(logFilePath, "utf-8");
+      const resultFilePath = path.join(targetFolder, targetFileBaseName);
+      fs.writeFileSync(resultFilePath, content, {
+        encoding: "utf-8",
+      });
     }
   }
 }

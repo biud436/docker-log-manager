@@ -121,6 +121,7 @@ class App {
       fs.mkdirSync(targetFolder);
     }
 
+    // 로그 파일명
     const baseId = v4();
     const containerName = container_name;
     const targetFileBaseName =

@@ -16,7 +16,7 @@ sudo npx ts-node ./src/index.ts --all
 sudo npx ts-node ./src/index.ts --all -d
 ```
 
-## 모든 프로세스 종료
+## 데몬 프로세스 종료
 
 ```sh
 ps -xa | grep docker-log-manager

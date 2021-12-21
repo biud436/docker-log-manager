@@ -10,10 +10,10 @@
 sudo npx ts-node ./src/index.ts --all
 ```
 
-일별 자동 삭제는 다음과 같습니다.
+일별 자동 삭제는 다음과 같습니다 (매일 오전 0시에 자동 실행됩니다)
 
 ```sh
-sudo npx ts-node ./src/index.ts --all --cron
+sudo npx ts-node ./src/index.ts --all -d
 ```
 
 ## 특정 컨테이너의 로그 삭제

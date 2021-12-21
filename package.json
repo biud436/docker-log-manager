@@ -10,6 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/minimist": "^1.2.2",
+    "@types/node": "^17.0.2",
+    "@types/node-cron": "^3.0.0",
     "axios": "^0.24.0",
     "minimist": "^1.2.5",
     "node-cron": "^3.0.0",

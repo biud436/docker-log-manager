@@ -34,6 +34,21 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.2.tgz#423c77877d0569db20e1fc80885ac4118314010e"
   integrity sha512-eZxlbI8GZscaGS7kkc/trHTT5xgrjH3/1n2JDwusC9iahPKWMRvRjJSAN5mCXviuTGQ/lHnhvv8Q1YTpnfz9gA==
 
+"@types/minimist@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@types/minimist/-/minimist-1.2.2.tgz#ee771e2ba4b3dc5b372935d549fd9617bf345b8c"
+  integrity sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==
+
+"@types/node-cron@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@types/node-cron/-/node-cron-3.0.0.tgz#f946cefb5c05c64f460090f6be97bd50460c8898"
+  integrity sha512-RNBIyVwa/1v2r8/SqK8tadH2sJlFRAo5Ghac/cOcCv4Kp94m0I03UmAh9WVhCqS9ZdB84dF3x47p9aTw8E4c4A==
+
+"@types/node@^17.0.2":
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.2.tgz#a4c07d47ff737e8ee7e586fe636ff0e1ddff070a"
+  integrity sha512-JepeIUPFDARgIs0zD/SKPgFsJEAF0X5/qO80llx59gOxFTboS9Amv3S+QfB7lqBId5sFXJ99BN0J6zFRvL9dDA==
+
 acorn-walk@^8.1.1:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/acorn-walk/-/acorn-walk-8.2.0.tgz#741210f2e2426454508853a2f44d0ab83b7f69c1"

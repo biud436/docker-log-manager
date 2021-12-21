@@ -48,6 +48,7 @@ sudo sh -c "truncate -s 0 <log_file_path>"
 노드 12버전 이상을 nvm을 통하여 설치해주시고, yarn을 통하여 패키지를 설치하세요.
 
 ```sh
+# 노드 패키지 설치
 npm install -g yarn
 yarn install
 ```

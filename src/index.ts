@@ -58,7 +58,7 @@ class App {
       const data = JSON.parse("{" + raw.toString("utf-8") + '"tracks":[]}');
       if ("LogPath" in data) {
         const logFile = data.LogPath;
-        this.copyLogFileAsTargetFolder(logFile);
+        this.copyLogFileAsTargetFolder(logFile, container_name);
         this.eraseLog(logFile);
         console.log("작업이 완료되었습니다");
       }
@@ -107,7 +107,7 @@ class App {
    *
    * @param logFilePath {string} 로그 파일의 경로를 기입하세요.
    */
-  copyLogFileAsTargetFolder(logFilePath: string) {
+  copyLogFileAsTargetFolder(logFilePath: string, container_name: string) {
     /**
      * @type {string}
      */
@@ -122,7 +122,7 @@ class App {
     }
 
     const baseId = v4();
-    const containerName = argv.container;
+    const containerName = container_name;
     const targetFileBaseName =
       moment().format(`YYYY-MM-DD-HH-mm-ss-${containerName}-${baseId}`) +
       ".log";

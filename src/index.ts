@@ -139,5 +139,25 @@ class App {
   }
 }
 
-const app = new App();
-app.start();
+if (argv.cron) {
+  const app = new App();
+  cron.schedule("0 0 * * *", () => {
+    // 스케줄 모드 추가
+    app.start();
+  });
+} else if (argv.d) {
+  const subprocess = cp.spawn(
+    `npx`,
+    ["ts-node", `${__dirname}/../src/index.ts`, "--cron"],
+    {
+      stdio: "ignore",
+      detached: true,
+    }
+  );
+  subprocess.unref();
+} else {
+  const app = new App();
+
+  // 스케줄 모드 추가
+  app.start();
+}

@@ -81,6 +81,11 @@ class App {
     fs.truncateSync(logFilePath, 0);
   }
 
+  /**
+   * 도커 컨테이너 목록을 뽑아냅니다.
+   *
+   * @returns {string[]}
+   */
   getContainerList() {
     const containerListCommand = Commander.getDockerContainerList();
     const raw = cp.execSync(containerListCommand, {

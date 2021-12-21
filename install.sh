@@ -1,2 +1,3 @@
 #!/bin/sh
-ln -s ./bin/docker-log-manager /usr/local/bin/docker-log-manager
+INDEX_FILE_PATH=$(readlink -f ./docker-log-manager)
+ln -s $INDEX_FILE_PATH /usr/local/bin/docker-log-manager

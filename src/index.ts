@@ -81,6 +81,19 @@ class App {
     fs.truncateSync(logFilePath, 0);
   }
 
+  getContainerList() {
+    const containerListCommand = Commander.getDockerContainerList();
+    const raw = cp.execSync(containerListCommand, {
+      encoding: "utf-8",
+    });
+    const lines = raw
+      .split(/[\r\n]+/)
+      .filter((line) => line.length > 0)
+      .map((line) => line.trim());
+
+    return lines;
+  }
+
   /**
    * 로그 파일을 복제합니다.
    *

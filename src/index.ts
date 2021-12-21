@@ -140,14 +140,15 @@ class App {
 }
 
 if (argv.cron) {
+  // 크론 모드로 프로세스를 실행합니다.
   const app = new App();
   const MINUTE_INTERVAL = "0 */1 * * * *";
   const DAILY_INTERVAL = "0 0 * * *";
   cron.schedule(DAILY_INTERVAL, () => {
-    // 스케줄 모드 추가
     app.start();
   });
 } else if (argv.d) {
+  // 데몬 프로세스로 실행되고 프로세스가 끝남
   const subprocess = cp.spawn(
     `npx`,
     ["ts-node", `${__dirname}/../src/index.ts`, "--cron", "--all"],
@@ -158,6 +159,7 @@ if (argv.cron) {
   );
   subprocess.unref();
 } else {
+  // 일반 모드로 실행 (프로세스가 끝나지 않음)
   const app = new App();
 
   // 스케줄 모드 추가

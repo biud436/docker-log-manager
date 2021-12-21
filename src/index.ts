@@ -60,7 +60,7 @@ class App {
         const logFile = data.LogPath;
         this.copyLogFileAsTargetFolder(logFile, container_name);
         this.eraseLog(logFile);
-        console.log("작업이 완료되었습니다");
+        console.log(`[${container_name}] 작업이 완료되었습니다`);
       }
     } catch (e) {
       console.warn(e);

@@ -141,7 +141,9 @@ class App {
 
 if (argv.cron) {
   const app = new App();
-  cron.schedule("0 0 * * *", () => {
+  const MINUTE_INTERVAL = "0 */1 * * * *";
+  const DAILY_INTERVAL = "0 0 * * *";
+  cron.schedule(MINUTE_INTERVAL, () => {
     // 스케줄 모드 추가
     app.start();
   });

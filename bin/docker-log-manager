@@ -1,0 +1,2 @@
+#!/bin/sh
+sudo npx ts-node ../src/index.ts --all -d

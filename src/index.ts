@@ -250,6 +250,7 @@ if (argv.cron) {
   // 데몬 프로세스로 실행되고 프로세스가 끝남
   const subprocess = cp.spawn(
     `npx`,
+    // !: 경로 문제로 start.sh가 실행되지 않음
     ["ts-node", `${__dirname}/../src/index.ts`, "--cron", "--all"],
     {
       stdio: "ignore",

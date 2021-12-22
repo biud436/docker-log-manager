@@ -33,6 +33,7 @@ class App {
     } else if (argv.all) {
       const containerList = this.getContainerList();
       for (const container of containerList) {
+        this.removeOldLogFiles();
         this.truncateLogFile(container);
       }
     }

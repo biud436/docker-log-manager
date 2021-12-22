@@ -15,6 +15,7 @@
     "@types/node-cron": "^3.0.0",
     "@types/uuid": "^8.3.3",
     "axios": "^0.24.0",
+    "chalk": "4",
     "minimist": "^1.2.5",
     "moment": "^2.29.1",
     "node-cron": "^3.0.0",

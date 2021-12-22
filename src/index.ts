@@ -8,8 +8,14 @@ import * as config from "../config.json";
 import minimist from "minimist";
 import moment from "moment";
 import { v4 } from "uuid";
+import chalk from "chalk";
 
 const argv = minimist(process.argv.slice(2));
+
+interface FileStat {
+  name: string;
+  modifyTime: number;
+}
 
 /**
  * @class App
@@ -138,7 +144,72 @@ class App {
       });
     }
   }
+
+  /**
+   * 오래된 파일을 재귀적으로 찾습니다.
+   * @param rootFolder
+   * @param list
+   */
+  findOldLogFiles(rootFolder: string, list: FileStat[]) {
+    let target = fs.readdirSync(config.targetFolder, {
+      encoding: "utf-8",
+    });
+
+    target.forEach((subDirectory) => {
+      const subFolder = path.join(rootFolder, subDirectory);
+      const stat = fs.statSync(subFolder);
+      if (stat.isDirectory()) {
+        this.findOldLogFiles(subFolder, list);
+      } else {
+        list.push(<FileStat>{
+          name: subDirectory,
+          modifyTime: stat.mtime.getTime(),
+        });
+      }
+    });
+  }
+
+  /**
+   * 파일의 수정 시간으로 정렬한 후, 한 달전 시간으로 필터링합니다.
+   * @param list
+   * @returns
+   */
+  sortByModifyTime(list: FileStat[]) {
+    list.sort((a, b) => {
+      return a.modifyTime - b.modifyTime;
+    });
+
+    // 한 달전으로 필터링
+    const filterTime = moment().subtract(31, "d").toDate().getTime();
+    list = list.filter((item) => {
+      return item.modifyTime < filterTime;
+    });
+
+    return list;
+  }
+
+  /**
+   * 한 달전 파일을 리스트에서 제거합니다.
+   */
+  removeOldLogFiles() {
+    let list = <FileStat[]>[];
+    this.findOldLogFiles(config.targetFolder, list);
+    list = this.sortByModifyTime(list);
+
+    list.forEach((file) => {
+      const filePath = path.join(config.targetFolder, file.name);
+      fs.unlinkSync(filePath);
+      console.log(chalk.yellow(`${file}을 제거하였습니다.`) + chalk.reset(""));
+    });
+  }
 }
+
+if (process.platform !== "linux") {
+  console.log(chalk.red("지원하지 않는 운영체제입니다."));
+  process.exit();
+}
+
+console.log(chalk.yellow("작업을 시작합니다."));
 
 if (argv.cron) {
   // 크론 모드로 프로세스를 실행합니다.

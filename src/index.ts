@@ -4,11 +4,12 @@ import * as cp from "child_process";
 import * as cron from "node-cron";
 import * as axios from "axios";
 import { Commander } from "./commander";
-import * as config from "../config.json";
 import minimist from "minimist";
 import moment from "moment";
 import { v4 } from "uuid";
 import chalk from "chalk";
+import { getConfig } from "./config";
+const config = getConfig();
 
 const argv = minimist(process.argv.slice(2));
 
@@ -249,6 +250,7 @@ if (argv.cron) {
     }
   );
   subprocess.unref();
+} else if (argv.test) {
 } else {
   // 일반 모드로 실행 (프로세스가 끝나지 않음)
   const app = new App();

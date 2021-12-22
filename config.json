@@ -1,4 +1,10 @@
 {
-  "targetFolder": "/home/ubuntu/logs",
-  "interval": "daily"
+  "windows": {
+    "targetFolder": "./test/logs",
+    "interval": "daily"
+  },
+  "linux": {
+    "targetFolder": "/home/ubuntu/logs",
+    "interval": "daily"
+  }
 }

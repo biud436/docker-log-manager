@@ -1,10 +1,12 @@
 {
   "windows": {
     "targetFolder": "./test/logs",
-    "interval": "daily"
+    "interval": "daily",
+    "oldFileDeleteDays": 31
   },
   "linux": {
     "targetFolder": "/home/ubuntu/logs",
-    "interval": "daily"
+    "interval": "daily",
+    "oldFileDeleteDays": 31
   }
 }

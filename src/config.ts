@@ -11,6 +11,7 @@ export type LogType =
 export interface ILoggingOption {
   targetFolder: string;
   interval: LogType;
+  oldFileDeleteDays: number;
 }
 
 export interface IConfig {

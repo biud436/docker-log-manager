@@ -182,7 +182,10 @@ class App {
     });
 
     // 한 달전으로 필터링
-    const filterTime = moment().subtract(31, "d").toDate().getTime();
+    const filterTime = moment()
+      .subtract(config.oldFileDeleteDays, "d")
+      .toDate()
+      .getTime();
     list = list.filter((item) => {
       return item.modifyTime < filterTime;
     });
@@ -201,12 +204,15 @@ class App {
     list.forEach((file) => {
       const filePath = path.join(config.targetFolder, file.name);
       fs.unlinkSync(filePath);
-      console.log(chalk.yellow(`${file}을 제거하였습니다.`) + chalk.reset(""));
+      console.log(
+        chalk.yellow(`${JSON.stringify(file)}을 제거하였습니다.`) +
+          chalk.reset("")
+      );
     });
   }
 }
 
-if (process.platform !== "linux") {
+if (process.platform !== "linux" && !argv.test) {
   console.log(chalk.red("지원하지 않는 운영체제입니다."));
   process.exit();
 }
@@ -251,6 +257,8 @@ if (argv.cron) {
   );
   subprocess.unref();
 } else if (argv.test) {
+  const app = new App();
+  app.removeOldLogFiles();
 } else {
   // 일반 모드로 실행 (프로세스가 끝나지 않음)
   const app = new App();

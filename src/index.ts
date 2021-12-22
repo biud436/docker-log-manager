@@ -146,12 +146,12 @@ if (argv.cron) {
   let interval = "0 0 * * *";
 
   switch (config.interval) {
-    default:
-    case "daily":
-      interval = "0 0 * * *";
-      break;
-    case "minutely":
+    case "minutely": // 분 단위
       interval = "0 */1 * * * *";
+      break;
+    default:
+    case "daily": // 일 단위
+      interval = "0 0 * * *";
       break;
   }
   cron.schedule(interval, () => {

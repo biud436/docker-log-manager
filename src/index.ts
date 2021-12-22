@@ -143,9 +143,18 @@ class App {
 if (argv.cron) {
   // 크론 모드로 프로세스를 실행합니다.
   const app = new App();
-  const MINUTE_INTERVAL = "0 */1 * * * *";
-  const DAILY_INTERVAL = "0 0 * * *";
-  cron.schedule(DAILY_INTERVAL, () => {
+  let interval = "0 0 * * *";
+
+  switch (config.interval) {
+    default:
+    case "daily":
+      interval = "0 0 * * *";
+      break;
+    case "minutely":
+      interval = "0 */1 * * * *";
+      break;
+  }
+  cron.schedule(interval, () => {
     app.start();
   });
 } else if (argv.d) {

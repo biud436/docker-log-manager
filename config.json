@@ -1,3 +1,4 @@
 {
-  "targetFolder": "/home/ubuntu/logs"
+  "targetFolder": "/home/ubuntu/logs",
+  "interval": "daily"
 }

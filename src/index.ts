@@ -175,6 +175,7 @@ class App {
    * @returns
    */
   sortByModifyTime(list: FileStat[]) {
+    // 1,2,4,5,6 순서로 정렬
     list.sort((a, b) => {
       return a.modifyTime - b.modifyTime;
     });

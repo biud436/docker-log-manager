@@ -220,9 +220,18 @@ if (argv.cron) {
     case "minutely": // 분 단위
       interval = "0 */1 * * * *";
       break;
+    case "hourly": // 시간 단위
+      interval = "0 0 */1 * * *";
+      break;
     default:
     case "daily": // 일 단위
       interval = "0 0 * * *";
+      break;
+    case "weekly": // 주 단위
+      interval = "0 0 * * 0";
+      break;
+    case "monthly": // 월 단위
+      interval = "0 0 1 * *";
       break;
   }
   cron.schedule(interval, () => {

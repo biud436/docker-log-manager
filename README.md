@@ -52,3 +52,21 @@ sudo sh -c "truncate -s 0 <log_file_path>"
 npm install -g yarn
 yarn install
 ```
+
+# docker-compose의 로깅 옵션 사용
+
+[https://docs.docker.com/compose/compose-file/compose-file-v3/#logging](https://docs.docker.com/compose/compose-file/compose-file-v3/#logging) 를 보면 저장되는 로그의 용량을 제한할 수 있습니다. 도커 설정 파일을 다시 적용한다면 이 옵션을 적용할 수 있습니다.
+
+```yml
+version: "3.9"
+services:
+  some-service:
+    image: some-service
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+```
+
+로깅 스토리지를 제한하면 쾌적한 서버 환경을 구축할 수 있습니다.

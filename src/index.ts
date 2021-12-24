@@ -162,11 +162,13 @@ class App {
       });
 
       // Webhook으로 데이터 전송
-      this.sendWebhook(<AxiosResponse<any, any>>{
-        data: {
-          logs: content,
-        },
-      });
+      if (config.webhook) {
+        this.sendWebhook(<AxiosResponse<any, any>>{
+          data: {
+            logs: content,
+          },
+        });
+      }
     }
   }
 

@@ -43,6 +43,35 @@ sudo sh -c "truncate -s 0 <log_file_path>"
 
 하지만 정기 실행보다는 docker-compose 상에서의 로그의 크기를 제한하는 것이 더 합리적이라고 생각되지만, 중간에 서버를 끌 수가 없는 경우에만 이 명령을 사용하는 것이 좋습니다.
 
+## 웹훅 서버로 로그 전송
+
+다음과 같이 웹훅 URL을 적으면 로그의 내용을 서버로 전송할 수 있습니다. 데이터는 POST 요청으로 전송됩니다.
+
+```json
+{
+  "windows": {
+    "targetFolder": "./test/logs",
+    "interval": "daily",
+    "oldFileDeleteDays": 31,
+    "webhook": "http://localhost:3000/a"
+  },
+  "linux": {
+    "targetFolder": "/home/ubuntu/logs",
+    "interval": "daily",
+    "oldFileDeleteDays": 31,
+    "webhook": "http://localhost:3000/a"
+  }
+}
+```
+
+스케줄러가 동작할 때, 웹훅 서버에서는 아래와 같이 로그 데이터를 수신 받게 됩니다.
+
+<p align="center">
+<img src="./docs/img/webhook.png">
+</p>
+
+`daily` 주기이므로, 매일밤 자정(0시)에 웹훅 서버에 전송됩니다.
+
 # 실행 방법
 
 노드 12버전 이상을 nvm을 통하여 설치해주시고, yarn을 통하여 패키지를 설치하세요.

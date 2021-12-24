@@ -2,7 +2,7 @@ import * as path from "path";
 import * as fs from "fs";
 import * as cp from "child_process";
 import * as cron from "node-cron";
-import * as axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { Commander } from "./commander";
 import minimist from "minimist";
 import moment from "moment";
@@ -37,6 +37,21 @@ class App {
         this.truncateLogFile(container);
       }
     }
+  }
+
+  /**
+   * 웹훅 URL로 메시지를 보냅니다.
+   */
+  sendWebhook(data: AxiosResponse<any, any>) {
+    const url = config.webhook;
+    axios
+      .post(url, data)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   /**
@@ -141,8 +156,16 @@ class App {
     if (fs.existsSync(logFilePath)) {
       const content = fs.readFileSync(logFilePath, "utf-8");
       const resultFilePath = path.join(targetFolder, targetFileBaseName);
+
       fs.writeFileSync(resultFilePath, content, {
         encoding: "utf-8",
+      });
+
+      // Webhook으로 데이터 전송
+      this.sendWebhook(<AxiosResponse<any, any>>{
+        data: {
+          logs: content,
+        },
       });
     }
   }
@@ -204,6 +227,7 @@ class App {
 
     list.forEach((file) => {
       const filePath = path.join(config.targetFolder, file.name);
+
       fs.unlinkSync(filePath);
       console.log(
         chalk.yellow(`${JSON.stringify(file)}을 제거하였습니다.`) +

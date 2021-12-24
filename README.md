@@ -45,7 +45,7 @@ sudo sh -c "truncate -s 0 <log_file_path>"
 
 ## 웹훅 서버로 로그 전송
 
-다음과 같이 웹훅 URL을 적으면 로그의 내용을 서버로 전송할 수 있습니다. 데이터는 POST 요청으로 전송됩니다.
+다음과 같이 `config.json` 파일에 `webhook`(웹훅 URL)을 적으면 로그의 내용을 서버로 전송할 수 있습니다. 데이터는 POST 요청으로 전송됩니다.
 
 ```json
 {
@@ -70,7 +70,7 @@ sudo sh -c "truncate -s 0 <log_file_path>"
 <img src="./docs/img/webhook.png">
 </p>
 
-`daily` 주기이므로, 매일밤 자정(0시)에 웹훅 서버에 전송됩니다.
+`daily` 주기이므로, 매일밤 자정(0시)에 웹훅 서버에 전송됩니다. 이 기능을 사용하려면 웹훅 서버가 준비되어있어야 합니다.
 
 # 실행 방법
 

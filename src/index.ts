@@ -43,7 +43,7 @@ class App {
    * 웹훅 URL로 메시지를 보냅니다.
    */
   sendWebhook(data: AxiosResponse<any, any>) {
-    const url = config.webhook;
+    const url = config.webhook!;
     axios
       .post(url, data)
       .then((res) => {

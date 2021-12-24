@@ -12,7 +12,7 @@ export interface ILoggingOption {
   targetFolder: string;
   interval: LogType;
   oldFileDeleteDays: number;
-  webhook: string;
+  webhook?: string;
 }
 
 export interface IConfig {

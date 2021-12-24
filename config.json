@@ -2,13 +2,11 @@
   "windows": {
     "targetFolder": "./test/logs",
     "interval": "daily",
-    "oldFileDeleteDays": 31,
-    "webhook": "http://localhost:3000/a"
+    "oldFileDeleteDays": 31
   },
   "linux": {
     "targetFolder": "/home/ubuntu/logs",
     "interval": "daily",
-    "oldFileDeleteDays": 31,
-    "webhook": "http://localhost:3000/a"
+    "oldFileDeleteDays": 31
   }
 }
